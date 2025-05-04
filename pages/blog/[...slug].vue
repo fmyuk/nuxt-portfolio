@@ -29,6 +29,7 @@
 const activeId = ref(null);
 
 onMounted(() => {
+  let elements = [];
   const callback = (entries) => {
     for (const entry of entries) {
       if (entry.isIntersecting) {
@@ -42,12 +43,13 @@ onMounted(() => {
     root: null,
     threshold: 0.5,
   });
-  const elements = document.querySelectorAll("h2, h3");
+  setTimeout(() => {
+    elements = document.querySelectorAll("h2, h3");
 
-  for (const element of elements) {
-    observer.observe(element);
-  }
-
+    for (const element of elements) {
+      observer.observe(element);
+    }
+  }, 150);
   onBeforeUnmount(() => {
     for (const element of elements) {
       observer.unobserve(element);
